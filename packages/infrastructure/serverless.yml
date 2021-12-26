@@ -1,0 +1,48 @@
+service: feedback-infrastructure
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+      seed: true
+      convertEmptyValues: false
+    seed:
+      domain:
+        sources:
+          - table: feedback-table
+            sources: [./src/seed/data.json]
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+
+resources:
+  Resources:
+    feedback:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: feedback-table
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: type
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+          - AttributeName: type
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

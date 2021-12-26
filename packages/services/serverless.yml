@@ -1,0 +1,23 @@
+service: feedback-services
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-plugin-optimize
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+
+package:
+  individually: true
+
+functions:
+  create:
+    handler: src/functions/hello.hello
+    events:
+      - http:
+          path: hello
+          method: get
