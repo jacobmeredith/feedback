@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "serverless offline start"
+    "start": "serverless dynamodb start"
   },
   "devDependencies": {
     "serverless": "^2.69.1",
