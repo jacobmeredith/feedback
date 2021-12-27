@@ -21,3 +21,4 @@ functions:
       - http:
           path: hello
           method: get
+          private: true

@@ -1,10 +1,22 @@
-import React from 'react';
+import * as React from 'react';
+
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes
+} from 'react-router-dom';
+
+import { Feedback } from './pages/Feedback';
 
 function App() {
   return (
-    <div className="App">
-      App
-    </div>
+    <React.Fragment>
+      <Router>
+        <Routes>
+          <Route path="/feedback" element={<Feedback />} />
+        </Routes>
+      </Router>
+    </React.Fragment>
   );
 }
 
