@@ -1,6 +1,28 @@
 [
   {
     "userId": "1",
-    "type": "survey"
+    "type": "capture|1",
+    "feedbackType": "traffic",
+    "feedbackUrl": "https://localhost:3000"
+  },
+  {
+    "userId": "1",
+    "type": "capture|2",
+    "feedbackType": "traffic",
+    "feedbackUrl": "https://localhost:3000/2"
+  },
+  {
+    "userId": "1",
+    "type": "capture|3",
+    "feedbackType": "traffic",
+    "feedbackUrl": "https://localhost:3000/3"
+  },
+  {
+    "userId": "1",
+    "type": "response|1",
+    "feedbackValue": {
+      "value": "green",
+      "text": "Very easy to understand"
+    }
   }
 ]
