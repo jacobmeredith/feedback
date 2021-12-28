@@ -11,7 +11,7 @@ function Feedback() {
       <Button type="secondary" onClick={() => setDrawer('create')}>Create new survey</Button>
       <Drawer open={drawer !== null} onClose={() => setDrawer(null)}>
         <React.Fragment>
-          {drawer === 'create' && <FeedbackCreateForm />}
+          {drawer === 'create' && <FeedbackCreateForm onClose={() => setDrawer(null)} />}
           {drawer === 'update' && <div>Update form</div>}
           {drawer === 'delete' && <div>Delete form</div>}
         </React.Fragment>
