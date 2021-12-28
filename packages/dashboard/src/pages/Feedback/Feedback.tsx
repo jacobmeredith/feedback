@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Button, Drawer} from '@feedback/design-system';
+import {Button, Card, Drawer} from '@feedback/design-system';
 import { FeedbackCreateForm } from '../../components/FeedbackCreateForm';
 
 function Feedback() {
@@ -8,7 +8,6 @@ function Feedback() {
 
   return (
     <React.Fragment>
-      <Button type="secondary" onClick={() => setDrawer('create')}>Create new survey</Button>
       <Drawer open={drawer !== null} onClose={() => setDrawer(null)}>
         <React.Fragment>
           {drawer === 'create' && <FeedbackCreateForm onClose={() => setDrawer(null)} />}
@@ -16,6 +15,10 @@ function Feedback() {
           {drawer === 'delete' && <div>Delete form</div>}
         </React.Fragment>
       </Drawer>
+      <Button type="secondary" onClick={() => setDrawer('create')}>Create new survey</Button>
+      <div className="mt-6">
+        <Card>Test</Card>
+      </div>
     </React.Fragment>
   )
 }
