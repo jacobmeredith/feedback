@@ -7,7 +7,7 @@ interface ICardProps {
 
 function Card({ children, className = 'bg-white' }: ICardProps) {
   return (
-    <div className={`${className} px-4 py-6 rounded-md`}>
+    <div className={`${className} px-6 py-4 rounded-md`}>
       {children}
     </div>
   )
