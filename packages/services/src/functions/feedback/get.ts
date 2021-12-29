@@ -23,6 +23,7 @@ export const get = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyR
     const feedbackResponse = {
       type: feedback.Item.type.S,
       feedbackType: feedback.Item.feedbackType.S,
+      feedbackTitle: feedback.Item.feedbackTitle.S,
       feedbackUrl: feedback.Item.feedbackUrl.S,
     }
   

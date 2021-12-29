@@ -3,18 +3,21 @@
     "userId": "1",
     "type": "capture|1",
     "feedbackType": "traffic",
+    "feedbackTitle": "Home page traffic light survey",
     "feedbackUrl": "https://localhost:3000"
   },
   {
     "userId": "1",
     "type": "capture|2",
     "feedbackType": "traffic",
+    "feedbackTitle": "About page traffic light survey",
     "feedbackUrl": "https://localhost:3000/2"
   },
   {
     "userId": "1",
     "type": "capture|3",
     "feedbackType": "traffic",
+    "feedbackTitle": "Contact us traffic light survey",
     "feedbackUrl": "https://localhost:3000/3"
   },
   {

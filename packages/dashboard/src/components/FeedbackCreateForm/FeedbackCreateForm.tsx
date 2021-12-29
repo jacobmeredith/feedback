@@ -11,11 +11,12 @@ function FeedbackCreateForm({ onClose = () => {} }: IFeedbackCreateFormProps) {
   const {handleSubmit, register, getValues} = useForm();
 
   const handleCreateFormSubmit = async () => {
-    const { url } = getValues();
+    const { title, url } = getValues();
 
     await httpClient.put('/feedback', {
       userId: '1',
       feedbackType: 'traffic',
+      feedbackTitle: title,
       feedbackUrl: url,
     }).then(() => {
       onClose();
@@ -24,11 +25,18 @@ function FeedbackCreateForm({ onClose = () => {} }: IFeedbackCreateFormProps) {
 
   return (
     <form onSubmit={handleSubmit(handleCreateFormSubmit)}>
-      <h2 className='mb-4 text-lg'>Create feedback survey</h2>
-      <Field label="Page url">
-        <TextInput type="url" placeholder="e.g. https://www.example.com/new-page" register={register('url', { required: true })} />
-      </Field>
+      <h2 className='text-lg'>Create feedback survey</h2>
       <div className="mt-4">
+        <Field label="Title">
+          <TextInput type="text" placeholder="e.g. Home page feedback" register={register('title', { required: true })} />
+        </Field>
+      </div>
+      <div className="mt-3">
+        <Field label="Page url">
+          <TextInput type="url" placeholder="e.g. https://www.example.com/new-page" register={register('url', { required: true })} />
+        </Field>
+      </div>
+      <div className="mt-3">
         <Button type="primary">Create</Button>
       </div>
     </form>

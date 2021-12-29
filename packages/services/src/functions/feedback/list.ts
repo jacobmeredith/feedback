@@ -24,6 +24,7 @@ export const list = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxy
     const feedbackResponse = result.Items?.map(item => ({
       type: item.type.S,
       feedbackType: item.feedbackType.S,
+      feedbackTitle: item.feedbackTitle.S,
       feedbackUrl: item.feedbackUrl.S,
     }));
   

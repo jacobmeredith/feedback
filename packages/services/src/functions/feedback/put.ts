@@ -18,6 +18,9 @@ export const put = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyR
         feedbackType: {
           S: body?.feedbackType
         },
+        feedbackTitle: {
+          S: body?.feedbackTitle
+        },
         feedbackUrl: {
           S: body?.feedbackUrl
         }
@@ -30,6 +33,7 @@ export const put = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyR
     return responseOk({
       type: body.type,
       feedbackType: body.feedbackType,
+      feedbackTitle: body.feedbackTitle,
       feedbackUrl: body.feedbackUrl
     });
   } catch (error: any) {
