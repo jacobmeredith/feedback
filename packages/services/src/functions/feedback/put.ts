@@ -13,7 +13,7 @@ export const put = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyR
           S: body?.userId
         },
         type: {
-          S: `capture|${uuidv4()}`
+          S: `capture|${body?.feedbackId||uuidv4()}`
         },
         feedbackType: {
           S: body?.feedbackType

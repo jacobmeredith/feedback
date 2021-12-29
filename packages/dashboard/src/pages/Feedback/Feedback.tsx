@@ -1,12 +1,14 @@
 import * as React from 'react';
 
 import {Button, Card, Drawer} from '@feedback/design-system';
-import { FeedbackCreateForm } from '../../components/FeedbackCreateForm';
+import { FeedbackPutForm } from '../../components/FeedbackPutForm';
+import { FeedbackDeleteForm } from '../../components/FeedbackDeleteForm';
 import { httpClient } from '../../helpers/httpClient';
 
 function Feedback() {
   const [drawer, setDrawer] = React.useState<null|'create'|'update'|'delete'>(null);
   const [surveys, setSurveys] = React.useState<Array<any>>([]);
+  const [activeSurvey, setActiveSurvey] = React.useState<any>(null);
 
   React.useEffect(() => {
     httpClient.get('/feedback/1')
@@ -15,19 +17,28 @@ function Feedback() {
       });
   }, []);
 
+  const setDrawerData = (type: 'create'|'update'|'delete'|null, survey: any) => {
+    if (type === null) {
+      return setDrawer(null);
+    }
+
+    setActiveSurvey(survey)
+    setDrawer(type);
+  };
+
   const surveysMap = surveys.map(survey => (
-    <div className="mb-4">
-      <Card key={survey.type}>
+    <div className="mb-4" key={survey.type}>
+      <Card>
         <h3 className="text-lg">{survey.feedbackTitle}</h3>
         <p className="mt-2">
           URL: <a className="text-blue-700 hover:underline" href={survey.feedbackUrl}>{survey.feedbackUrl}</a>
         </p>
         <div className="flex mt-4">
           <div>
-            <Button type="outline" onClick={() => setDrawer('update')}>Update</Button>
+            <Button type="outline" onClick={() => setDrawerData('update', survey)}>Update</Button>
           </div>
           <div className="ml-2">
-            <Button type="danger" onClick={() => setDrawer('delete')}>Delete</Button>
+            <Button type="danger" onClick={() => setDrawerData('delete', survey)}>Delete</Button>
           </div>
         </div>
       </Card>
@@ -38,9 +49,9 @@ function Feedback() {
     <React.Fragment>
       <Drawer open={drawer !== null} onClose={() => setDrawer(null)}>
         <React.Fragment>
-          {drawer === 'create' && <FeedbackCreateForm onClose={() => setDrawer(null)} />}
-          {drawer === 'update' && <div>Update form</div>}
-          {drawer === 'delete' && <div>Delete form</div>}
+          {drawer === 'create' && <FeedbackPutForm buttonText="Create survey" onClose={() => setDrawerData(null, null)} />}
+          {drawer === 'update' && <FeedbackPutForm buttonText="Update survey" feedbackTitle={activeSurvey.feedbackTitle} feedbackUrl={activeSurvey.feedbackUrl} feedbackId={activeSurvey.type.split('|')[1]} onClose={() => setDrawerData(null, null)} />}
+          {drawer === 'delete' && <FeedbackDeleteForm feedbackTitle={activeSurvey.feedbackTitle} feedbackId={activeSurvey.type.split('|')[1]} onClose={() => setDrawerData(null, null)} />}
         </React.Fragment>
       </Drawer>
       <Button type="secondary" onClick={() => setDrawer('create')}>Create new survey</Button>

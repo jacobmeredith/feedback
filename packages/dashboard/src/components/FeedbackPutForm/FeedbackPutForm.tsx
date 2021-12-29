@@ -3,14 +3,18 @@ import * as React from 'react';
 import {useForm} from 'react-hook-form';
 import { httpClient } from '../../helpers/httpClient';
 
-interface IFeedbackCreateFormProps {
+interface IFeedbackPutFormProps {
+  buttonText: string;
+  feedbackTitle?: string;
+  feedbackUrl?: string;
+  feedbackId?: string|null;
   onClose?: () => void;
 }
 
-function FeedbackCreateForm({ onClose = () => {} }: IFeedbackCreateFormProps) {
+function FeedbackPutForm({ buttonText, feedbackTitle = '', feedbackUrl = '', feedbackId = null, onClose = () => {} }: IFeedbackPutFormProps) {
   const {handleSubmit, register, getValues} = useForm();
 
-  const handleCreateFormSubmit = async () => {
+  const handlePutFormSubmit = async () => {
     const { title, url } = getValues();
 
     await httpClient.put('/feedback', {
@@ -18,29 +22,30 @@ function FeedbackCreateForm({ onClose = () => {} }: IFeedbackCreateFormProps) {
       feedbackType: 'traffic',
       feedbackTitle: title,
       feedbackUrl: url,
+      feedbackId: feedbackId
     }).then(() => {
       onClose();
     });
   }
 
   return (
-    <form onSubmit={handleSubmit(handleCreateFormSubmit)}>
+    <form onSubmit={handleSubmit(handlePutFormSubmit)}>
       <h2 className='text-lg'>Create feedback survey</h2>
       <div className="mt-4">
         <Field label="Title">
-          <TextInput type="text" placeholder="e.g. Home page feedback" register={register('title', { required: true })} />
+          <TextInput type="text" placeholder="e.g. Home page feedback" value={feedbackTitle} register={register('title', { required: true })} />
         </Field>
       </div>
       <div className="mt-3">
         <Field label="Page url">
-          <TextInput type="url" placeholder="e.g. https://www.example.com/new-page" register={register('url', { required: true })} />
+          <TextInput type="url" placeholder="e.g. https://www.example.com/new-page" value={feedbackUrl} register={register('url', { required: true })} />
         </Field>
       </div>
       <div className="mt-3">
-        <Button type="primary">Create</Button>
+        <Button type="primary">{buttonText}</Button>
       </div>
     </form>
   )
 }
 
-export {FeedbackCreateForm};
+export {FeedbackPutForm};
