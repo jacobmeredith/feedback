@@ -31,7 +31,7 @@ function Feedback() {
       <Card>
         <h3 className="text-lg">{survey.feedbackTitle}</h3>
         <p className="mt-2">
-          URL: <a className="text-blue-700 hover:underline" href={survey.feedbackUrl}>{survey.feedbackUrl}</a>
+          URL: <a className="text-purple-700 hover:underline" href={survey.feedbackUrl}>{survey.feedbackUrl}</a>
         </p>
         <div className="flex mt-4">
           <div>
