@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="bg-gray-100 w-5/6 h-screen p-6">
+      <div className="bg-gray-100 w-5/6 h-screen p-6 overflow-auto">
         <Router>
           <Routes>
             <Route path="/feedback" element={<Feedback />} />
