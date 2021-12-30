@@ -22,10 +22,26 @@
   },
   {
     "userId": "1",
-    "type": "response|1",
+    "type": "response|1|1",
     "feedbackValue": {
       "value": "green",
       "text": "Very easy to understand"
+    }
+  },
+  {
+    "userId": "1",
+    "type": "response|1|2",
+    "feedbackValue": {
+      "value": "amber",
+      "text": "Was okay to understand"
+    }
+  },
+  {
+    "userId": "1",
+    "type": "response|1|3",
+    "feedbackValue": {
+      "value": "red",
+      "text": "Needs work"
     }
   }
 ]
