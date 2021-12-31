@@ -1,4 +1,4 @@
-// export type ItemTypes = 'response'|'capture';
+export type ItemTypes = 'response'|'capture';
 
 export interface IFeedbackSurvey {
   type: string;
