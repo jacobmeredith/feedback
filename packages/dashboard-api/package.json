@@ -1,10 +1,10 @@
 {
-  "name": "@feedback/services",
+  "name": "@feedback/dashboard-api",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "serverless offline --stage dev",
+    "start": "serverless offline --stage dev --httpPort 3008 --lambdaPort 3009",
     "build": "tsc"
   },
   "devDependencies": {
@@ -19,6 +19,7 @@
   "dependencies": {
     "@feedback/common": "^1.0.0",
     "aws-sdk": "^2.1048.0",
+    "axios": "^0.24.0",
     "uuid": "^8.3.2"
   }
 }

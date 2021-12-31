@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { client } from "../../helpers/dynamoClient";
-import { responseNotOk, responseOk } from "../../helpers/responses";
+import { responseOk, responseNotOk } from "@feedback/common";
 import { v4 as uuidv4 } from 'uuid';
 
 export const put = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {

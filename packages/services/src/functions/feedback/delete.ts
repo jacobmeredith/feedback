@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { client } from "../../helpers/dynamoClient";
-import { responseNotOk, responseOk } from "../../helpers/responses";
+import { responseOk, responseNotOk } from "@feedback/common";
 
 export const del = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {

@@ -1,0 +1,60 @@
+service: feedback-dashboard-api
+
+useDotenv: true
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-plugin-optimize
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+
+package:
+  individually: true
+
+functions:
+  feedback-get:
+    handler: src/functions/feedback/get.get
+    events:
+      - http:
+          path: feedback/{userId}/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                userId: true
+                id: true
+  # feedback-put:
+  #   handler: src/functions/feedback/put.put
+  #   events:
+  #     - http:
+  #         path: feedback
+  #         method: put
+  #         private: true
+  # feedback-delete:
+  #   handler: src/functions/feedback/delete.del
+  #   events:
+  #     - http:
+  #         path: feedback/{userId}/{id}
+  #         method: delete
+  #         private: true
+  #         request:
+  #           parameters:
+  #             paths:
+  #               userId: true
+  #               id: true
+  # feedback-list:
+  #   handler: src/functions/feedback/list.list
+  #   events:
+  #     - http:
+  #         path: feedback/{userId}
+  #         method: get
+  #         private: true
+  #         request:
+  #           parameters:
+  #             paths:
+  #               userId: true
