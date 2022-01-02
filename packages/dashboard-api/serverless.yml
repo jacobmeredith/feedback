@@ -28,33 +28,30 @@ functions:
               paths:
                 userId: true
                 id: true
-  # feedback-put:
-  #   handler: src/functions/feedback/put.put
-  #   events:
-  #     - http:
-  #         path: feedback
-  #         method: put
-  #         private: true
-  # feedback-delete:
-  #   handler: src/functions/feedback/delete.del
-  #   events:
-  #     - http:
-  #         path: feedback/{userId}/{id}
-  #         method: delete
-  #         private: true
-  #         request:
-  #           parameters:
-  #             paths:
-  #               userId: true
-  #               id: true
-  # feedback-list:
-  #   handler: src/functions/feedback/list.list
-  #   events:
-  #     - http:
-  #         path: feedback/{userId}
-  #         method: get
-  #         private: true
-  #         request:
-  #           parameters:
-  #             paths:
-  #               userId: true
+  feedback-put:
+    handler: src/functions/feedback/put.put
+    events:
+      - http:
+          path: feedback
+          method: put
+  feedback-delete:
+    handler: src/functions/feedback/delete.del
+    events:
+      - http:
+          path: feedback/{userId}/{id}
+          method: delete
+          request:
+            parameters:
+              paths:
+                userId: true
+                id: true
+  feedback-list:
+    handler: src/functions/feedback/list.list
+    events:
+      - http:
+          path: feedback/{userId}
+          method: get
+          request:
+            parameters:
+              paths:
+                userId: true
