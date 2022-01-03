@@ -14,6 +14,7 @@
   "scripts": {
     "start": "concurrently npm:start:*",
     "start:infrastructure": "cd packages/infrastructure && yarn start",
+    "start:dashboard-api": "cd packages/dashboard-api && yarn start",
     "start:services": "cd packages/services && yarn start",
     "build": "concurrently npm:build:*",
     "build:common": "cd packages/common && yarn build",
