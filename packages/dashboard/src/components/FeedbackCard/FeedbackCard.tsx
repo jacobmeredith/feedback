@@ -1,5 +1,7 @@
-import { Button, Card } from '@feedback/design-system';
 import * as React from 'react';
+
+import { Button, Card } from '@feedback/design-system';
+
 import {IFeedbackSurvey} from '@feedback/common';
 
 interface IFeedbackCardProps {
@@ -10,7 +12,7 @@ interface IFeedbackCardProps {
 function FeedbackCard({survey, onClick}: IFeedbackCardProps) {
   return (
     <div className="mb-4" key={survey.type}>
-      <Card>
+      <Card className="bg-white border border-solid border-gray-200">
         <div className="flex items-center">
           <div>
             <h3 className="text-lg">{survey.feedbackTitle}</h3>
