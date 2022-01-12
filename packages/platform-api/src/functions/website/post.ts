@@ -1,7 +1,8 @@
-import client, { WebsiteType } from './../../data/client';
 import { responseNotOk, responseOk } from '@feedback/common';
 
 import { APIGatewayProxyEvent } from 'aws-lambda';
+import { WebsiteType } from './../../data/schema';
+import client from './../../data/client';
 import { v4 as uuid4 } from 'uuid';
 
 const handler = async ({ body = null, pathParameters }: APIGatewayProxyEvent) => {
