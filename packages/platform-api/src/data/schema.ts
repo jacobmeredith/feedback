@@ -32,7 +32,8 @@ const Schema = {
       surveyId:     { type: String, uuid: 'uuid' },
       responseId:   { type: String, uuid: 'uuid' },
       responseData: { 
-        type: Object, schema: {
+        type: Object, 
+        schema: {
           value:    { type: String },
           text:     { type: String }
         }

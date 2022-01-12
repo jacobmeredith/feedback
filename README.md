@@ -8,12 +8,10 @@
 ## Local development requirements
 - Yarn
 - Java Runtime Engine (JRE) version 6.x or newer (local dynamodb instance)
-- Serverless
+- Serverless - `yarn add serverless -g`
+- Local dynamo db - `cd packages/infrastructure && sls dynamodb install`
 
 ## Project setup
 - First run `yarn install` in the root directory.
-- If you want to run the API gateway locally run `yarn start` in the `packages/services` directory.
+- If you want to run the platform API locally run `yarn start` in the `packages/platform-api` directory.
 - If you want to run the dynamodb instance locally with seed data you can do this by running `yarn start` in the `packages/infrastructure` directory.
-
-## Project roadmap
-This [trello board](https://trello.com/b/4ytATkIA) will be used to track the work that is planned and the work that is in progress.
