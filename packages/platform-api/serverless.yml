@@ -133,3 +133,61 @@ functions:
               paths:
                 websiteId: true
                 surveyId: true
+  response-list:
+    handler: src/functions/response/list.handler
+    events:
+      - http:
+          path: /{surveyId}/response
+          method: get
+          private: true
+          request:
+            parameters:
+              paths:  
+                surveyId: true
+  response-get:
+    handler: src/functions/response/get.handler
+    events:
+      - http:
+          path: /{surveyId}/response/{responseId}
+          method: get
+          private: true
+          request:
+            parameters:
+              paths:  
+                surveyId: true
+                responseId: true
+  response-post:
+    handler: src/functions/response/post.handler
+    events:
+      - http:
+          path: /{surveyId}/response
+          method: post
+          private: true
+          request:
+            parameters:
+              paths:
+                surveyId: true
+  response-put:
+    handler: src/functions/response/put.handler
+    events:
+      - http:
+          path: /{surveyId}/response/{responseId}
+          method: put
+          private: true
+          request:
+            parameters:
+              paths:
+                surveyId: true
+                responseId: true
+  response-delete:
+    handler: src/functions/response/delete.handler
+    events:
+      - http:
+          path: /{surveyId}/response/{responseId}
+          method: delete
+          private: true
+          request:
+            parameters:
+              paths:
+                surveyId: true
+                responseId: true

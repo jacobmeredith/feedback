@@ -9,13 +9,8 @@ const handler = async ({ pathParameters }: APIGatewayProxyEvent) => {
     const { surveyId, responseId } = pathParameters as { surveyId: string, responseId: string };
 
     const Response = client.getModel<ResponseType>("Response");
-    const response = await Response.get({ pk: `SURVEY#${surveyId}`, sk: `RESPONSE#${responseId}` });
-  
-    if (response) {
-      return responseOk(response);
-    }
-
-    return responseNotOk({ body: {}, message: "Response not found" });
+    await Response.remove({ pk: `SURVEY#${surveyId}`, sk: `RESPONSE#${responseId}` });
+    return responseOk();
   } catch (error: any) {
     return responseNotOk({ body: {}, message: error.message });
   }

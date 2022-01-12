@@ -34,7 +34,7 @@ describe("get.ts", () => {
     });
   });
 
-  it("should return an internal server error if no website is found", async () => {
+  it("should return an internal server error if no survey is found", async () => {
     (client as any).getModel.mockImplementation(() => ({
       get: () => null
     }));

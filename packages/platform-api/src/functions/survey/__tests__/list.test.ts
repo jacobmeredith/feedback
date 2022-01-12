@@ -5,7 +5,7 @@ import { handler } from './../list';
 jest.mock('dynamodb-onetable');
 jest.mock('../../../data/client');
 
-describe("get.ts", () => {
+describe("list.ts", () => {
   it("should return OK if a list of surveys are found", async () => {
     const expectedResponse = [
       {

@@ -1,28 +1,36 @@
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import client from '../../../data/client';
-import { handler } from './../get';
+import { handler } from './../list';
 
 jest.mock('dynamodb-onetable');
 jest.mock('../../../data/client');
 
-describe("get.ts", () => {
-  it("should return OK if a response is found", async () => {
-    const expectedResponse = {
-      "surveyId": "surveyId",
-      "responseId": "responseId",
-      "responseData": {
-        "value": "red"
+describe("list.ts", () => {
+  it("should return OK if a list of responses are found", async () => {
+    const expectedResponse = [
+      {
+        "surveyId": "surveyId",
+        "responseId": "responseId",
+        "responseData": {
+          "value": "red"
+        }
+      },
+      {
+        "surveyId": "surveyId",
+        "responseId": "responseId",
+        "responseData": {
+          "value": "red"
+        }
       }
-    };
+    ];
 
     (client as any).getModel.mockImplementation(() => ({
-      get: () => expectedResponse
+      find: () => expectedResponse
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        surveyId: "surveyId",
-        responseId: "responseId",
+        surveyId: "surveyId"
       }
     } as any;
 
@@ -34,15 +42,14 @@ describe("get.ts", () => {
     });
   });
 
-  it("should return an internal server error if no response is found", async () => {
+  it("should return an internal server error if no responses are found", async () => {
     (client as any).getModel.mockImplementation(() => ({
-      get: () => null
+      find: () => []
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        surveyId: "surveyId",
-        responseId: "responseId",
+        surveyId: "surveyId"
       }
     } as any;
 
@@ -50,21 +57,20 @@ describe("get.ts", () => {
 
     expect(res).toEqual({
       statusCode: 500,
-      body: JSON.stringify({ message: "Response not found" }),
+      body: JSON.stringify({ message: "No responses found" }),
     });
   });
 
   it("should return an internal server error if an error is thrown", async () => {
     (client as any).getModel.mockImplementation(() => ({
-      get: () => {
+      find: () => {
         throw new Error("Something went wrong")
       }
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        surveyId: "surveyId",
-        responseId: "responseId",
+        surveyId: "surveyId"
       }
     } as any;
 

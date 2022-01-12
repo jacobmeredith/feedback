@@ -1,29 +1,32 @@
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import client from '../../../data/client';
-import { handler } from './../get';
+import { handler } from './../put';
 
 jest.mock('dynamodb-onetable');
 jest.mock('../../../data/client');
 
-describe("get.ts", () => {
-  it("should return OK if a response is found", async () => {
+describe("put.ts", () => {
+  it("should return OK if a response is updated", async () => {
     const expectedResponse = {
       "surveyId": "surveyId",
       "responseId": "responseId",
       "responseData": {
-        "value": "red"
+        "value": "red",
       }
     };
 
     (client as any).getModel.mockImplementation(() => ({
-      get: () => expectedResponse
+      update: () => expectedResponse
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
         surveyId: "surveyId",
         responseId: "responseId",
-      }
+      },
+      body: JSON.stringify({
+        value: "red",
+      })
     } as any;
 
     const res = await handler(event);
@@ -34,11 +37,7 @@ describe("get.ts", () => {
     });
   });
 
-  it("should return an internal server error if no response is found", async () => {
-    (client as any).getModel.mockImplementation(() => ({
-      get: () => null
-    }));
-
+  it("should return an internal server error if no body is provided", async () => {
     const event: APIGatewayProxyEvent = {
       pathParameters: {
         surveyId: "surveyId",
@@ -50,13 +49,13 @@ describe("get.ts", () => {
 
     expect(res).toEqual({
       statusCode: 500,
-      body: JSON.stringify({ message: "Response not found" }),
+      body: JSON.stringify({ message: "No body was provided" }),
     });
   });
 
   it("should return an internal server error if an error is thrown", async () => {
     (client as any).getModel.mockImplementation(() => ({
-      get: () => {
+      update: () => {
         throw new Error("Something went wrong")
       }
     }));
@@ -65,7 +64,10 @@ describe("get.ts", () => {
       pathParameters: {
         surveyId: "surveyId",
         responseId: "responseId",
-      }
+      },
+      body: JSON.stringify({
+        value: "red",
+      })
     } as any;
 
     const res = await handler(event);

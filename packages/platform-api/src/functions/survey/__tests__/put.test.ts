@@ -6,7 +6,7 @@ jest.mock('dynamodb-onetable');
 jest.mock('../../../data/client');
 
 describe("put.ts", () => {
-  it("should return OK if a website is updated", async () => {
+  it("should return OK if a survey is updated", async () => {
     const expectedResponse = {
       "websiteId": "websiteId",
       "surveyId": "surveyId",

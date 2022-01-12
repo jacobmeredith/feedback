@@ -8,7 +8,7 @@ jest.mock('../../../data/client');
 jest.mock('uuid');
 
 describe("post.ts", () => {
-  it("should return OK if a website is created", async () => {
+  it("should return OK if a survey is created", async () => {
     const expectedResponse = {
       "websiteId": "websiteId",
       "surveyId": "surveyId",
@@ -42,7 +42,7 @@ describe("post.ts", () => {
     });
   });
 
-  it("should return an internal server error if no website body is provided", async () => {
+  it("should return an internal server error if no survey body is provided", async () => {
     const event: APIGatewayProxyEvent = {
       pathParameters: {
         websiteId: "websiteId",
