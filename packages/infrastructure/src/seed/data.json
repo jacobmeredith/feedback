@@ -3,7 +3,8 @@
     "pk": "USER#1234-1234-1234-1234",
     "sk": "WEBSITE#1234-1234-1234-1234",
     "type": "WEBSITE",
-    "website_id": "1234-1234-1234-1234",
+    "userId": "1234-1234-1234-1234",
+    "websiteId": "1234-1234-1234-1234",
     "name": "My Website",
     "url": "https://www.mywebsite.com"
   },
@@ -11,8 +12,9 @@
     "pk": "WEBSITE#1234-1234-1234-1234",
     "sk": "SURVEY#1234-1234-1234-1234",
     "type": "SURVEY",
-    "survey_id": "1234-1234-1234-1234",
-    "survey_type": "traffic",
+    "websiteId": "1234-1234-1234-1234",
+    "surveyId": "1234-1234-1234-1234",
+    "surveyType": "traffic",
     "name": "My Survey",
     "url": "https://www.mywebsite.com/test-page"
   },
@@ -20,8 +22,9 @@
     "pk": "SURVEY#1234-1234-1234-1234",
     "sk": "RESPONSE#1234-1234-1234-1234",
     "type": "RESPONSE",
-    "response_id": "1234-1234-1234-1234",
-    "response_data": {
+    "surveyId": "1234-1234-1234-1234",
+    "responseId": "1234-1234-1234-1234",
+    "responseData": {
       "value": "red"
     }
   }

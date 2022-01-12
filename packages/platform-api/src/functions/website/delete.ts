@@ -8,13 +8,8 @@ const handler = async ({ pathParameters }: APIGatewayProxyEvent) => {
     const { userId, websiteId } = pathParameters as { userId: string, websiteId: string };
 
     const Website = client.getModel<WebsiteType>("Website");
-    const website = await Website.get({ pk: `USER#${userId}`, sk: `WEBSITE#${websiteId}` });
-  
-    if (website) {
-      return responseOk(website);
-    }
-
-    return responseNotOk({ body: {}, message: "Website not found" });
+    await Website.remove({ pk: `USER#${userId}`, sk: `WEBSITE#${websiteId}` });
+    return responseOk();
   } catch (error: any) {
     return responseNotOk({ body: {}, message: error.message });
   }

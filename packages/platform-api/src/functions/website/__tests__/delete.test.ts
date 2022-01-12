@@ -1,21 +1,14 @@
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import client from '../../../data/client';
-import { handler } from './../get';
+import { handler } from './../delete';
 
 jest.mock('dynamodb-onetable');
 jest.mock('../../../data/client');
 
-describe("get.ts", () => {
-  it("should return OK if a website is found", async () => {
-    const expectedResponse = {
-      "userId": "userId",
-      "websiteId": "websiteId",
-      "name": "My Website",
-      "url": "https://www.mywebsite.com"
-    };
-
+describe("delete.ts", () => {
+  it("should return OK if a website is deleted", async () => {
     (client as any).getModel.mockImplementation(() => ({
-      get: () => expectedResponse
+      remove: () => true
     }));
 
     const event: APIGatewayProxyEvent = {
@@ -29,33 +22,13 @@ describe("get.ts", () => {
 
     expect(res).toEqual({
       statusCode: 200,
-      body: JSON.stringify(expectedResponse)
-    });
-  });
-
-  it("should return an internal server error if no website is found", async () => {
-    (client as any).getModel.mockImplementation(() => ({
-      get: () => null
-    }));
-
-    const event: APIGatewayProxyEvent = {
-      pathParameters: {
-        userId: "userId",
-        websiteId: "websiteId",
-      }
-    } as any;
-
-    const res = await handler(event);
-
-    expect(res).toEqual({
-      statusCode: 500,
-      body: JSON.stringify({ message: "Website not found" }),
+      body: "{}"
     });
   });
 
   it("should return an internal server error if an error is thrown", async () => {
     (client as any).getModel.mockImplementation(() => ({
-      get: () => {
+      remove: () => {
         throw new Error("Something went wrong")
       }
     }));

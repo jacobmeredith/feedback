@@ -5,16 +5,16 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 
 const handler = async ({ pathParameters }: APIGatewayProxyEvent) => {
   try {
-    const { userId, websiteId } = pathParameters as { userId: string, websiteId: string };
+    const { userId } = pathParameters as { userId: string };
 
     const Website = client.getModel<WebsiteType>("Website");
-    const website = await Website.get({ pk: `USER#${userId}`, sk: `WEBSITE#${websiteId}` });
+    const websites = await Website.find({ pk: `USER#${userId}`, sk: { begins_with: 'WEBSITE#' } });
   
-    if (website) {
-      return responseOk(website);
+    if (websites.length > 0) {
+      return responseOk(websites);
     }
 
-    return responseNotOk({ body: {}, message: "Website not found" });
+    return responseNotOk({ body: {}, message: "No websites found" });
   } catch (error: any) {
     return responseNotOk({ body: {}, message: error.message });
   }

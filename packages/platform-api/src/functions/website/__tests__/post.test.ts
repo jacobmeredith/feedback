@@ -1,12 +1,14 @@
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import client from '../../../data/client';
-import { handler } from './../get';
+import { handler } from './../post';
+import { v4 as uuid4 } from 'uuid';
 
 jest.mock('dynamodb-onetable');
 jest.mock('../../../data/client');
+jest.mock('uuid');
 
-describe("get.ts", () => {
-  it("should return OK if a website is found", async () => {
+describe("post.ts", () => {
+  it("should return OK if a website is created", async () => {
     const expectedResponse = {
       "userId": "userId",
       "websiteId": "websiteId",
@@ -14,15 +16,20 @@ describe("get.ts", () => {
       "url": "https://www.mywebsite.com"
     };
 
+    (uuid4 as any).mockResolvedValue(() => "websiteId");
+
     (client as any).getModel.mockImplementation(() => ({
-      get: () => expectedResponse
+      create: () => expectedResponse
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
         userId: "userId",
-        websiteId: "websiteId",
-      }
+      },
+      body: JSON.stringify({
+        name: "My Website",
+        url: "https://www.mywebsite.com"
+      })
     } as any;
 
     const res = await handler(event);
@@ -33,15 +40,10 @@ describe("get.ts", () => {
     });
   });
 
-  it("should return an internal server error if no website is found", async () => {
-    (client as any).getModel.mockImplementation(() => ({
-      get: () => null
-    }));
-
+  it("should return an internal server error if no website body is provided", async () => {
     const event: APIGatewayProxyEvent = {
       pathParameters: {
         userId: "userId",
-        websiteId: "websiteId",
       }
     } as any;
 
@@ -49,13 +51,15 @@ describe("get.ts", () => {
 
     expect(res).toEqual({
       statusCode: 500,
-      body: JSON.stringify({ message: "Website not found" }),
+      body:  JSON.stringify({ message: "No body was provided" }),
     });
   });
 
   it("should return an internal server error if an error is thrown", async () => {
+    (uuid4 as any).mockResolvedValue(() => "websiteId");
+
     (client as any).getModel.mockImplementation(() => ({
-      get: () => {
+      create: () => {
         throw new Error("Something went wrong")
       }
     }));
@@ -63,8 +67,11 @@ describe("get.ts", () => {
     const event: APIGatewayProxyEvent = {
       pathParameters: {
         userId: "userId",
-        websiteId: "websiteId",
-      }
+      },
+      body: JSON.stringify({
+        name: "My Website",
+        url: "https://www.mywebsite.com"
+      })
     } as any;
 
     const res = await handler(event);

@@ -17,15 +17,61 @@ package:
   individually: true
 
 functions:
-  website-get:
-    handler: src/functions/website/get.handler
+  website-list:
+    handler: src/functions/website/list.handler
     events:
       - http:
-          path: {userId}/webiste/{id}
+          path: /{userId}/webiste
           method: get
           private: true
           request:
             parameters:
               paths:
                 userId: true
-                id: true
+  website-get:
+    handler: src/functions/website/get.handler
+    events:
+      - http:
+          path: /{userId}/webiste/{websiteId}
+          method: get
+          private: true
+          request:
+            parameters:
+              paths:
+                userId: true
+                websiteId: true
+  website-post:
+    handler: src/functions/website/post.handler
+    events:
+      - http:
+          path: /{userId}/webiste
+          method: post
+          private: true
+          request:
+            parameters:
+              paths:
+                userId: true
+  website-put:
+    handler: src/functions/website/put.handler
+    events:
+      - http:
+          path: /{userId}/webiste/{websiteId}
+          method: put
+          private: true
+          request:
+            parameters:
+              paths:
+                userId: true
+                websiteId: true
+  website-delete:
+    handler: src/functions/website/delete.handler
+    events:
+      - http:
+          path: /{userId}/webiste/{websiteId}
+          method: delete
+          private: true
+          request:
+            parameters:
+              paths:
+                userId: true
+                websiteId: true
