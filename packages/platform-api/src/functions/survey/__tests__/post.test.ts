@@ -1,29 +1,37 @@
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import client from '../../../data/client';
-import { handler } from './../get';
+import { handler } from './../post';
+import { v4 as uuid4 } from 'uuid';
 
 jest.mock('dynamodb-onetable');
 jest.mock('../../../data/client');
+jest.mock('uuid');
 
-describe("get.ts", () => {
-  it("should return OK if a survey is found", async () => {
+describe("post.ts", () => {
+  it("should return OK if a website is created", async () => {
     const expectedResponse = {
       "websiteId": "websiteId",
       "surveyId": "surveyId",
       "surveyType": "traffic",
-      "name": "My Survey",
-      "url": "https://www.mywebsite.com/new-page"
+      "name": "My Website",
+      "url": "https://www.mywebsite.com/test"
     };
 
+    (uuid4 as any).mockResolvedValue(() => "surveyId");
+
     (client as any).getModel.mockImplementation(() => ({
-      get: () => expectedResponse
+      create: () => expectedResponse
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        websiteId: "userId",
-        surveyId: "surveyId",
-      }
+        websiteId: "websiteId",
+      },
+      body: JSON.stringify({
+        surveyType: "traffic",
+        name: "My Website",
+        url: "https://www.mywebsite.com/test"
+      })
     } as any;
 
     const res = await handler(event);
@@ -34,15 +42,10 @@ describe("get.ts", () => {
     });
   });
 
-  it("should return an internal server error if no website is found", async () => {
-    (client as any).getModel.mockImplementation(() => ({
-      get: () => null
-    }));
-
+  it("should return an internal server error if no website body is provided", async () => {
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        websiteId: "userId",
-        surveyId: "surveyId",
+        websiteId: "websiteId",
       }
     } as any;
 
@@ -50,22 +53,27 @@ describe("get.ts", () => {
 
     expect(res).toEqual({
       statusCode: 500,
-      body: JSON.stringify({ message: "Survey not found" }),
+      body:  JSON.stringify({ message: "No body was provided" }),
     });
   });
 
   it("should return an internal server error if an error is thrown", async () => {
+    (uuid4 as any).mockResolvedValue(() => "surveyId");
+
     (client as any).getModel.mockImplementation(() => ({
-      get: () => {
+      create: () => {
         throw new Error("Something went wrong")
       }
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        websiteId: "userId",
-        surveyId: "surveyId",
-      }
+        websiteId: "websiteId",
+      },
+      body: JSON.stringify({
+        name: "My Website",
+        url: "https://www.mywebsite.com/test"
+      })
     } as any;
 
     const res = await handler(event);

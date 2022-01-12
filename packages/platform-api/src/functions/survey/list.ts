@@ -6,16 +6,16 @@ import client from './../../data/client';
 
 const handler = async ({ pathParameters }: APIGatewayProxyEvent) => {
   try {
-    const { websiteId, surveyId } = pathParameters as { websiteId: string, surveyId: string };
+    const { websiteId } = pathParameters as { websiteId: string };
 
     const Survey = client.getModel<SurveyType>("Survey");
-    const survey = await Survey.get({ pk: `WEBSITE#${websiteId}`, sk: `SURVEY#${surveyId}` });
+    const surveys = await Survey.find({ pk: `WEBSITE#${websiteId}`, sk: { begins_with: 'SURVEY#' } });
   
-    if (survey) {
-      return responseOk(survey);
+    if (surveys.length > 0) {
+      return responseOk(surveys);
     }
 
-    return responseNotOk({ body: {}, message: "Survey not found" });
+    return responseNotOk({ body: {}, message: "No surveys found" });
   } catch (error: any) {
     return responseNotOk({ body: {}, message: error.message });
   }

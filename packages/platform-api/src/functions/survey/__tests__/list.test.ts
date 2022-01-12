@@ -1,28 +1,36 @@
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import client from '../../../data/client';
-import { handler } from './../get';
+import { handler } from './../list';
 
 jest.mock('dynamodb-onetable');
 jest.mock('../../../data/client');
 
 describe("get.ts", () => {
-  it("should return OK if a survey is found", async () => {
-    const expectedResponse = {
-      "websiteId": "websiteId",
-      "surveyId": "surveyId",
-      "surveyType": "traffic",
-      "name": "My Survey",
-      "url": "https://www.mywebsite.com/new-page"
-    };
+  it("should return OK if a list of surveys are found", async () => {
+    const expectedResponse = [
+      {
+        "websiteId": "websiteId",
+        "surveyId": "surveyId",
+        "surveyType": "traffic",
+        "name": "My Website",
+        "url": "https://www.mywebsite.com"
+      },
+      {
+        "websiteId": "websiteId",
+        "surveyId": "surveyId",
+        "surveyType": "traffic",
+        "name": "My Website",
+        "url": "https://www.mywebsite.com"
+      }
+    ];
 
     (client as any).getModel.mockImplementation(() => ({
-      get: () => expectedResponse
+      find: () => expectedResponse
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        websiteId: "userId",
-        surveyId: "surveyId",
+        websiteId: "websiteId"
       }
     } as any;
 
@@ -34,15 +42,14 @@ describe("get.ts", () => {
     });
   });
 
-  it("should return an internal server error if no website is found", async () => {
+  it("should return an internal server error if no surveys are found", async () => {
     (client as any).getModel.mockImplementation(() => ({
-      get: () => null
+      find: () => []
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        websiteId: "userId",
-        surveyId: "surveyId",
+        websiteId: "websiteId"
       }
     } as any;
 
@@ -50,21 +57,20 @@ describe("get.ts", () => {
 
     expect(res).toEqual({
       statusCode: 500,
-      body: JSON.stringify({ message: "Survey not found" }),
+      body: JSON.stringify({ message: "No surveys found" }),
     });
   });
 
   it("should return an internal server error if an error is thrown", async () => {
     (client as any).getModel.mockImplementation(() => ({
-      get: () => {
+      find: () => {
         throw new Error("Something went wrong")
       }
     }));
 
     const event: APIGatewayProxyEvent = {
       pathParameters: {
-        websiteId: "userId",
-        surveyId: "surveyId",
+        websiteId: "websiteId"
       }
     } as any;
 
