@@ -1,0 +1,31 @@
+service: feedback-platform-api
+
+useDotenv: true
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-plugin-optimize
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+
+package:
+  individually: true
+
+functions:
+  website-get:
+    handler: src/functions/website/get.handler
+    events:
+      - http:
+          path: {userId}/webiste/{id}
+          method: get
+          private: true
+          request:
+            parameters:
+              paths:
+                userId: true
+                id: true
