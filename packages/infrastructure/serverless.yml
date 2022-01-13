@@ -19,7 +19,7 @@ custom:
       domain:
         sources:
           - table: feedback-table
-            sources: [./src/seed/data.json]
+            sources: [./src/seed-data.json]
 
 provider:
   name: aws
