@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="twOilVX6tU5nZvyyWSMV" name="Page-1">
-        <mxGraphModel dx="643" dy="545" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1197" dy="917" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -10,7 +10,7 @@
                 <mxCell id="2" value="Dashboard" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="431" y="190" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="3">
+                <mxCell id="25" value="" style="edgeStyle=none;html=1;" parent="1" source="3" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="493" y="371" as="targetPoint"/>
                     </mxGeometry>
@@ -19,7 +19,7 @@
                     <mxGeometry x="431" y="280" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="5" value="Platform API" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="281" y="460" width="270" height="60" as="geometry"/>
+                    <mxGeometry x="280" y="460" width="271" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="" style="edgeStyle=none;html=1;" parent="1" source="13" target="15" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -27,7 +27,7 @@
                 <mxCell id="13" value="Package" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="277" y="190" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="24" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="15">
+                <mxCell id="24" value="" style="edgeStyle=none;html=1;" parent="1" source="15" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="338" y="371" as="targetPoint"/>
                     </mxGeometry>
@@ -35,16 +35,16 @@
                 <mxCell id="15" value="Package API" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="277" y="280" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="22" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="20" target="2">
+                <mxCell id="22" value="" style="edgeStyle=none;html=1;" parent="1" source="20" target="2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="Authenticate" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="20" value="Amazon cognito authenticate" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="431" y="100" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="23" target="5">
+                <mxCell id="26" value="" style="edgeStyle=none;html=1;" parent="1" source="23" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" value="Authenticate" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="23" value="API Key authentication" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="281" y="370" width="270" height="60" as="geometry"/>
                 </mxCell>
             </root>
