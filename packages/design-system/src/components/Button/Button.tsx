@@ -2,7 +2,7 @@ import * as React from 'react'
 
 interface IButtonProps {
   children: React.ReactNode;
-  type: 'primary'|'secondary'|'outline'|'warning'|'danger'|'success';
+  variant: 'primary'|'secondary'|'outline'|'warning'|'danger'|'success';
   onClick?: () => void;
 }
 
@@ -15,9 +15,9 @@ enum EnumButtonType {
   success = 'bg-green-500 border-green-500 text-white rounded'
 }
 
-function Button({children, type, onClick = () => {}}: IButtonProps) {
+function Button({children, variant, onClick = () => {}}: IButtonProps) {
   return (
-    <button className={`border py-2 px-4 ${EnumButtonType[type]}`} onClick={onClick}>{children}</button>
+    <button className={`border py-2 px-4 ${EnumButtonType[variant]}`} onClick={onClick}>{children}</button>
   )
 }
 

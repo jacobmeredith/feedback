@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ChevronLeftIcon, ChevronRightIcon, ClipboardCheckIcon, LockClosedIcon, UserIcon } from '@heroicons/react/outline';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ interface ISidebarProps {
 function Sidebar({collapsed, onCollapse}: ISidebarProps) {
   const style = {
     sm: `sm:h-16 sm:w-full flex-row`,
-    md: `md:h-screen md:flex-col ${collapsed ? 'md:w-20 items-center' : 'md:w-64'}`
+    md: `md:h-screen md:flex-col ${collapsed ? 'md:w-20 items-center' : 'md:w-72'}`
   }
 
   return (
@@ -22,17 +22,11 @@ function Sidebar({collapsed, onCollapse}: ISidebarProps) {
       </Link>
       <div className="flex flex-row md:flex-col md:mt-8">
         <Link className="text-white text-lg mr-3 md:mr-0 md:mb-4 flex items-center" to="/surveys">
-          <ClipboardCheckIcon className="w-4 h-4 md:w-6 md:h-6 mr-2" />
-          <span className={`ease-in-out duration-300 transition-all ${collapsed ? 'md:opacity-0 md:w-0' : 'md:opacity-100'}`}>Surveys</span>
+          Surveys
         </Link>
         <Link className="text-white text-lg mr-3 md:mr-0 md:mb-4 flex items-center" to="/account">
-          <UserIcon className="w-4 h-4 md:w-6 md:h-6 mr-2" />
-          <span className={`ease-in-out duration-300 transition-all ${collapsed ? 'md:opacity-0 md:w-0' : 'md:opacity-100'}`}>Account</span>
+          Account
         </Link>
-        <button className="text-white text-lg mr-3 md:mr-0 md:mb-4 flex items-center">
-          <LockClosedIcon className="w-4 h-4 md:w-6 md:h-6 mr-2" />
-          <span className={`ease-in-out duration-300 transition-all ${collapsed ? 'md:opacity-0 md:w-0' : 'md:opacity-100'}`}>Log out</span>
-        </button>
       </div>
       <div className="hidden md:flex mt-auto justify-center items-center">
         <button className="text-white p-1 bg-white/25 rounded-md" onClick={onCollapse}>{collapsed ? <ChevronRightIcon className="w-8 h-8" /> : <ChevronLeftIcon className="w-8 h-8" />}</button>

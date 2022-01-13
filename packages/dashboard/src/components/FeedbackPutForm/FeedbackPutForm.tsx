@@ -1,7 +1,9 @@
-import { Button, Field, TextInput } from '@feedback/design-system';
 import * as React from 'react';
-import {useForm} from 'react-hook-form';
+
+import { Button, Field, TextInput } from '@feedback/design-system';
+
 import { httpClient } from '../../helpers/httpClient';
+import {useForm} from 'react-hook-form';
 
 interface IFeedbackPutFormProps {
   buttonText: string;
@@ -42,7 +44,7 @@ function FeedbackPutForm({ buttonText, feedbackTitle = '', feedbackUrl = '', fee
         </Field>
       </div>
       <div className="mt-3">
-        <Button type="primary">{buttonText}</Button>
+        <Button variant="primary">{buttonText}</Button>
       </div>
     </form>
   )

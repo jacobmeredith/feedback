@@ -14,8 +14,8 @@ function Drawer({ open = false, children, onClose = () => {}}: IDrawerProps) {
   }, [open]);
 
   const styles = {
-    sm: `rounded-tl-lg rounded-tr-lg h-3/4 w-full left-0 bottom-0 ${isOpen ? 'translate-y-0' : 'translate-y-full'}`,
-    md: `md:rounded-tl-lg md:rounded-bl-lg md:rounded-tr-none md:h-full md:w-1/2 md:left-auto md:bottom-auto bottom-0 md:left-none md:top-0 md:right-0 md:translate-y-0 ${isOpen ? 'md:translate-x-0' : 'md:translate-x-full'}`
+    sm: `h-3/4 w-full left-0 bottom-0 ${isOpen ? 'translate-y-0' : 'translate-y-full'}`,
+    md: `md:h-full md:w-1/2 md:left-auto md:bottom-auto bottom-0 md:left-none md:top-0 md:right-0 md:translate-y-0 ${isOpen ? 'md:translate-x-0' : 'md:translate-x-full'}`
   }
 
   return (

@@ -1,11 +1,11 @@
 export type ItemTypes = 'response'|'capture';
 
 export interface IFeedbackSurvey {
-  type: string;
-  feedbackType: string;
-  feedbackTitle: string;
-  feedbackUrl: string;
-  feedbackResponses: IFeedbackResponse[];
+  websiteId: string;
+  surveyId: string;
+  surveyType: string;
+  name: string;
+  url: string;
 }
 
 export interface IFeedbackResponse {

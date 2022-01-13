@@ -19,6 +19,46 @@
     "url": "https://www.mywebsite.com/test-page"
   },
   {
+    "pk": "WEBSITE#1234-1234-1234-1234",
+    "sk": "SURVEY#1234-1234-1235-1234",
+    "type": "SURVEY",
+    "websiteId": "1234-1234-1234-1234",
+    "surveyId": "1234-1234-1235-1234",
+    "surveyType": "traffic",
+    "name": "My Survey",
+    "url": "https://www.mywebsite.com/test-page"
+  },
+  {
+    "pk": "WEBSITE#1234-1234-1234-1234",
+    "sk": "SURVEY#1234-1234-1236-1234",
+    "type": "SURVEY",
+    "websiteId": "1234-1234-1234-1234",
+    "surveyId": "1234-1234-1236-1234",
+    "surveyType": "traffic",
+    "name": "My Survey",
+    "url": "https://www.mywebsite.com/test-page"
+  },
+  {
+    "pk": "WEBSITE#1234-1234-1234-1234",
+    "sk": "SURVEY#1234-1234-1237-1234",
+    "type": "SURVEY",
+    "websiteId": "1234-1234-1234-1234",
+    "surveyId": "1234-1234-1237-1234",
+    "surveyType": "traffic",
+    "name": "My Survey",
+    "url": "https://www.mywebsite.com/test-page"
+  },
+  {
+    "pk": "WEBSITE#1234-1234-1234-1234",
+    "sk": "SURVEY#1234-1234-1238-1234",
+    "type": "SURVEY",
+    "websiteId": "1234-1234-1234-1234",
+    "surveyId": "1234-1234-1238-1234",
+    "surveyType": "traffic",
+    "name": "My Survey",
+    "url": "https://www.mywebsite.com/test-page"
+  },
+  {
     "pk": "SURVEY#1234-1234-1234-1234",
     "sk": "RESPONSE#1234-1234-1234-1234",
     "type": "RESPONSE",
