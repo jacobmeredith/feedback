@@ -6,8 +6,8 @@ import {
   Routes
 } from 'react-router-dom';
 
-import { Feedback } from './pages/Feedback';
 import { Sidebar } from './components/Sidebar';
+import { Survey } from './pages/Survey';
 
 function App() {
   const [collapsed, setCollapsed] = React.useState(false);
@@ -18,7 +18,7 @@ function App() {
         <Sidebar collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)} />
         <div className={`bg-gray-100 h-screen overflow-auto ease-in-out duration-300 transition-all w-full`}>
           <Routes>
-            <Route path="/surveys" element={<Feedback />} />
+            <Route path="/surveys" element={<Survey />} />
           </Routes>
         </div>
       </div>
