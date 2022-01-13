@@ -15,7 +15,7 @@ const handler = async ({ body = null, pathParameters }: APIGatewayProxyEvent) =>
 
     const id = uuid4();
   
-    const Response = client.getModel<ResponseType>("Website");
+    const Response = client.getModel<ResponseType>("Response");
     const response = await Response.create({
       pk: `SURVEY#${surveyId}`,
       sk: `RESPONSE#${id}`,
