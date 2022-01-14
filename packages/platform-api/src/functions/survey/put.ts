@@ -17,7 +17,7 @@ const handler = async ({ body = null, pathParameters }: APIGatewayProxyEvent) =>
     const survey = await Survey.update({ 
       pk: `WEBSITE#${websiteId}`,
       sk: `SURVEY#${surveyId}`,
-      type: 'WEBSITE',
+      type: 'SURVEY',
       websiteId: websiteId,
       surveyId: surveyId,
       surveyType: bodyParsed.surveyType,

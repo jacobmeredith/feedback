@@ -19,7 +19,7 @@ const handler = async ({ body = null, pathParameters }: APIGatewayProxyEvent) =>
     const survey = await Survey.create({
       pk: `WEBSITE#${websiteId}`,
       sk: `SURVEY#${id}`,
-      type: "WEBSITE",
+      type: "SURVEY",
       websiteId: websiteId,
       surveyId: id,
       surveyType: bodyParsed.surveyType,

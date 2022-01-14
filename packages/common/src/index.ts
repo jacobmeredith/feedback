@@ -1,6 +1,6 @@
 export type ItemTypes = 'response'|'capture';
 
-export interface IFeedbackSurvey {
+export interface ISurvey {
   websiteId: string;
   surveyId: string;
   surveyType: string;
@@ -8,7 +8,7 @@ export interface IFeedbackSurvey {
   url: string;
 }
 
-export interface IFeedbackResponse {
+export interface IResponse {
   type: string;
   feedbackValue: {
     value: string;

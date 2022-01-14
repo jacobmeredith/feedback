@@ -2,20 +2,20 @@ import * as React from 'react';
 
 import { Button, Field, TextInput } from '@feedback/design-system';
 
-import { httpClient } from '../../helpers/httpClient';
+import { ISurvey } from '@feedback/common';
+import { httpClient } from '../../data/httpClient';
 import {useForm} from 'react-hook-form';
 
-interface IFeedbackDeleteFormProps {
-  feedbackTitle: string;
-  feedbackId: string;
+interface ISurveyDeleteFormProps {
+  survey: ISurvey;
   onClose?: () => void;
 }
 
-function FeedbackDeleteForm({ feedbackTitle, feedbackId, onClose = () => {} }: IFeedbackDeleteFormProps) {
+function SurveyDeleteForm({ survey, onClose = () => {} }: ISurveyDeleteFormProps) {
   const {handleSubmit, register} = useForm();
 
   const handleCreateFormSubmit = async () => {
-    await httpClient.delete(`/feedback/1/${feedbackId}`).then(() => {
+    await httpClient.delete(`/feedback/1/${survey.surveyId}`).then(() => {
       onClose();
     });
   }
@@ -24,8 +24,8 @@ function FeedbackDeleteForm({ feedbackTitle, feedbackId, onClose = () => {} }: I
     <form onSubmit={handleSubmit(handleCreateFormSubmit)}>
       <h2 className='text-lg'>Delete feedback survey</h2>
       <div className="mt-4">
-        <Field label={`Enter the title of the survey (${feedbackTitle})`}>
-          <TextInput type="text" placeholder={feedbackTitle} register={register('title', { validate: value => value === feedbackTitle })} />
+        <Field label={`Enter the title of the survey (${survey.name})`}>
+          <TextInput type="text" placeholder={survey.name} register={register('title', { validate: value => value === survey.name })} />
         </Field>
       </div>
       <div className="mt-3">
@@ -35,4 +35,4 @@ function FeedbackDeleteForm({ feedbackTitle, feedbackId, onClose = () => {} }: I
   )
 }
 
-export {FeedbackDeleteForm};
+export {SurveyDeleteForm};

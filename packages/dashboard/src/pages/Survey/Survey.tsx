@@ -2,45 +2,44 @@ import * as React from 'react';
 
 import {Button, Drawer} from '@feedback/design-system';
 
-import { FeedbackCard } from '../../components/FeedbackCard';
-import { FeedbackDeleteForm } from '../../components/FeedbackDeleteForm';
-import { FeedbackPutForm } from '../../components/FeedbackPutForm';
-import {IFeedbackSurvey} from '@feedback/common';
-import { httpClient } from '../../helpers/httpClient';
+import {ISurvey} from '@feedback/common';
+import { SurveyCard } from '../../components/SurveyCard';
+import { SurveyCreateForm } from '../../components/SurveyCreateForm';
+import { SurveyDeleteForm } from '../../components/SurveyDeleteForm';
+import { SurveyUpdateForm } from '../../components/SurveyUpdateForm';
+import { getAllSurveys } from '../../data/survey';
 
 function Survey() {
-  const [survey, setSurvey] = React.useState<null|'create'|'update'|'delete'>(null);
-  const [surveys, setSurveys] = React.useState<Array<IFeedbackSurvey>>([]);
-  const [activeSurvey, setActiveSurvey] = React.useState<IFeedbackSurvey|null>(null);
+  const [darawerType, setDrawerType] = React.useState<null|'create'|'update'|'delete'>(null);
+  const [surveys, setSurveys] = React.useState<Array<ISurvey>>([]);
+  const [activeSurvey, setActiveSurvey] = React.useState<ISurvey|null>(null);
 
   React.useEffect(() => {
-    httpClient.get('/1234-1234-1234-1234/survey')
-      .then(({data}) => {
-        setSurveys(data);
-      });
+    getAllSurveys('1234-1234-1234-1234')
+      .then(setSurveys);
   }, []);
 
   const setDrawerData = (type: 'create'|'update'|'delete'|null, survey: any) => {
     if (type === null) {
-      return setSurvey(null);
+      return setDrawerType(null);
     }
     setActiveSurvey(survey)
-    setSurvey(type);
+    setDrawerType(type);
   };
 
-  const surveysMap = surveys.map(survey => <FeedbackCard key={survey.surveyId} survey={survey} onClick={(type) => setDrawerData(type, survey)} />);
+  const surveysMap = surveys.map(survey => <SurveyCard key={survey.surveyId} survey={survey} onClick={(type) => setDrawerData(type, survey)} />);
 
   return (
     <React.Fragment>
-      <Drawer open={survey !== null} onClose={() => setSurvey(null)}>
+      <Drawer open={darawerType !== null} onClose={() => setDrawerType(null)}>
         <React.Fragment>
-          {survey === 'create' && <FeedbackPutForm buttonText="Create survey" onClose={() => setDrawerData(null, null)} />}
-          {survey === 'update' && <FeedbackPutForm buttonText="Update survey" feedbackTitle={activeSurvey?.name} feedbackUrl={activeSurvey?.url} feedbackId={activeSurvey?.surveyId} onClose={() => setDrawerData(null, null)} />}
-          {survey === 'delete' && <FeedbackDeleteForm feedbackTitle={activeSurvey?.name||''} feedbackId={activeSurvey?.surveyId||''} onClose={() => setDrawerData(null, null)} />}
+          {darawerType === 'create' && <SurveyCreateForm onClose={() => setDrawerData(null, null)} />}
+          {(darawerType === 'update' && activeSurvey) && <SurveyUpdateForm survey={activeSurvey} onClose={() => setDrawerData(null, null)} />}
+          {(darawerType === 'delete' && activeSurvey) && <SurveyDeleteForm survey={activeSurvey} onClose={() => setDrawerData(null, null)} />}
         </React.Fragment>
       </Drawer>
-      <div className="pt-6 pl-6">
-        <Button variant="outline" onClick={() => setSurvey('create')}>Create new survey</Button>
+      <div className="pt-6 px-6">
+        <Button variant="outline" onClick={() => setDrawerType('create')}>Create new survey</Button>
       </div>
       <div className="mt-6 px-3 flex flex-wrap">
         {surveysMap}

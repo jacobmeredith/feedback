@@ -2,15 +2,15 @@ import * as React from 'react';
 
 import { Button, Card } from '@feedback/design-system';
 
-import {IFeedbackSurvey} from '@feedback/common';
+import {ISurvey} from '@feedback/common';
 import { LinkIcon } from '@heroicons/react/outline';
 
-interface IFeedbackCardProps {
-  survey: IFeedbackSurvey;
+interface ISurveyCardProps {
+  survey: ISurvey;
   onClick: (type: 'create'|'update'|'delete'|null) => void;
 }
 
-function FeedbackCard({survey, onClick}: IFeedbackCardProps) {
+function SurveyCard({survey, onClick}: ISurveyCardProps) {
   return (
     <div className="w-1/3 px-3 pb-6" key={survey.surveyId}>
       <Card className="bg-white border border-solid border-gray-200">
@@ -31,4 +31,4 @@ function FeedbackCard({survey, onClick}: IFeedbackCardProps) {
   )
 }
 
-export {FeedbackCard};
+export {SurveyCard};
